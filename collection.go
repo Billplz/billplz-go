@@ -20,7 +20,7 @@ type Init struct {
   A string
 }
 
-func (e *Init) GetCollection(collectionId string) {
+func (e *Init) GetCollection(collectionId string) (string) {
   env := e.A
   url := ""
   client := &http.Client{}
@@ -41,7 +41,7 @@ func (e *Init) GetCollection(collectionId string) {
   response, _ := client.Do(req)
   bodyText, _ := ioutil.ReadAll(response.Body)
   s := string(bodyText)
-  return fmt.Println(s)
+  return s
 }
 
 // ei3a6mdl
