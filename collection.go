@@ -16,12 +16,14 @@ func basicAuth(username, password string) string {
   return auth
 }
 
-type Init struct {
-  A string
+var ENVIRONTMENT = "";
+
+func Init(e string) {
+	ENVIRONTMENT = e;
 }
 
-func (e *Init) GetCollection(collectionId string) (string) {
-  env := e.A
+func GetCollection(collectionId string) (string) {
+  env := ENVIRONTMENT // e.A
   url := ""
   client := &http.Client{}
 
@@ -40,7 +42,7 @@ func (e *Init) GetCollection(collectionId string) (string) {
 
   response, _ := client.Do(req)
   bodyText, _ := ioutil.ReadAll(response.Body)
-  s := string(bodyText)
+	s := string(bodyText)
   return s
 }
 
