@@ -11,15 +11,12 @@ const (
 	staging_url = "https://billplz-staging.herokuapp.com"
 )
 
-func basicAuth(username, password string) string {
-  auth := username + ":" + password
-  return auth
-}
-
 var ENVIRONTMENT = "";
+var APIKEY = "";
 
-func Init(e string) {
+func Init(e string, f string) {
 	ENVIRONTMENT = e;
+  APIKEY = f
 }
 
 func GetCollection(collectionId string) (string) {
@@ -38,7 +35,7 @@ func GetCollection(collectionId string) (string) {
   url += fmt.Sprintf("/api/v3/collections/%s", collectionId)
 
   req, _ := http.NewRequest("GET", url, nil)
-  req.SetBasicAuth("69da23bf-da10-4fda-814d-3ad970035d38", "")
+  req.SetBasicAuth(APIKEY, "")
 
   response, _ := client.Do(req)
   bodyText, _ := ioutil.ReadAll(response.Body)
