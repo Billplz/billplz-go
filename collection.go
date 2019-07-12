@@ -6,29 +6,29 @@ import (
   "io/ioutil"
   "log"
   "bytes"
+  "encoding/json"
   models "billplz/models"
 )
 
 const (
-  production_url = "https://billplz.com"
-	staging_url = "https://billplz-staging.herokuapp.com"
+  productionUrl = "https://billplz.com"
+	stagingUrl = "https://billplz-staging.herokuapp.com"
 )
 
-var ENVIRONTMENT = "";
-var APIKEY = "";
+var ENVIRONTMENT = ""
+var APIKEY = ""
+var URL := ""
 
 func Init(e string, f string) {
-	ENVIRONTMENT = e;
+	ENVIRONTMENT = e
   APIKEY = f
 
-  URL := ""
-
   if ENVIRONTMENT == "production" {
-    URL = production_url
+    URL = productionUrl
   }
 
   if ENVIRONTMENT == "staging" {
-    URL = staging_url
+    URL = stagingUrl
   }
 }
 
