@@ -7,7 +7,7 @@ import (
   "log"
   "bytes"
   "encoding/json"
-  models "billplz-go/models"
+  models "github.com/helmiruza/billplz-go/models"
 )
 
 const (
