@@ -1,4 +1,4 @@
-package constants
+package billplz
 
 var ENVIRONTMENT = ""
 var APIKEY = ""

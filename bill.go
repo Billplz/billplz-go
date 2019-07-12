@@ -11,15 +11,15 @@ import (
 )
 
 func Init(e string, f string) {
-	constants.ENVIRONTMENT = e
-  constants.APIKEY = f
+	ENVIRONTMENT = e
+  APIKEY = f
 
-  if constants.ENVIRONTMENT == "production" {
-    constants.URL = constants.ProductionUrl
+  if ENVIRONTMENT == "production" {
+    URL = ProductionUrl
   }
 
   if ENVIRONTMENT == "staging" {
-    constants.URL = constants.StagingUrl
+    URL = StagingUrl
   }
 }
 
@@ -29,7 +29,7 @@ func GetBill(billId string) (string) {
   URL += fmt.Sprintf("/api/v4/bills/%s", billId)
 
   req, _ := http.NewRequest("GET", URL, nil)
-  req.SetBasicAuth(constants.APIKEY, "")
+  req.SetBasicAuth(APIKEY, "")
 
   resp, _ := client.Do(req)
   body, _ := ioutil.ReadAll(resp.Body)
@@ -38,13 +38,13 @@ func GetBill(billId string) (string) {
 }
 
 func CreateBill(data models.Bill) (string) {
-  constants.URL += "/api/v4/bills"
+  URL += "/api/v4/bills"
   requestBody, _ := json.Marshal(data)
 
   client := &http.Client{}
 
-  req, _ := http.NewRequest("POST", constants.URL, bytes.NewBuffer(requestBody))
-  req.SetBasicAuth(constants.APIKEY, "")
+  req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
+  req.SetBasicAuth(APIKEY, "")
   req.Header.Set("Content-type", "application/json")
 
   resp, _ := client.Do(req)

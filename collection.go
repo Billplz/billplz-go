@@ -11,25 +11,25 @@ import (
 )
 
 func Init(e string, f string) {
-	constants.ENVIRONTMENT = e
-  constants.APIKEY = f
+	ENVIRONTMENT = e
+  APIKEY = f
 
-  if constants.ENVIRONTMENT == "production" {
-    constants.URL = constants.ProductionUrl
+  if ENVIRONTMENT == "production" {
+    URL = ProductionUrl
   }
 
-  if constants.ENVIRONTMENT == "staging" {
-    constants.URL = constants.StagingUrl
+  if ENVIRONTMENT == "staging" {
+    URL = StagingUrl
   }
 }
 
 func GetCollection(collectionId string) (string) {
   client := &http.Client{}
 
-  constants.URL += fmt.Sprintf("/api/v4/collections/%s", collectionId)
+  URL += fmt.Sprintf("/api/v4/collections/%s", collectionId)
 
-  req, _ := http.NewRequest("GET", constants.URL, nil)
-  req.SetBasicAuth(constants.APIKEY, "")
+  req, _ := http.NewRequest("GET", URL, nil)
+  req.SetBasicAuth(APIKEY, "")
 
   resp, _ := client.Do(req)
   body, _ := ioutil.ReadAll(resp.Body)
@@ -38,13 +38,13 @@ func GetCollection(collectionId string) (string) {
 }
 
 func CreateCollection(data models.Collection) (string) {
-  constants.URL += "/api/v4/collections"
+  URL += "/api/v4/collections"
   requestBody, _ := json.Marshal(data)
 
   client := &http.Client{}
 
-  req, _ := http.NewRequest("POST", constants.URL, bytes.NewBuffer(requestBody))
-  req.SetBasicAuth(constants.APIKEY, "")
+  req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
+  req.SetBasicAuth(APIKEY, "")
   req.Header.Set("Content-type", "application/json")
 
   resp, _ := client.Do(req)
