@@ -4,6 +4,9 @@ import (
   "fmt"
 	"net/http"
   "io/ioutil"
+  "log"
+  "bytes"
+  models "billplz/models"
 )
 
 const (
@@ -17,29 +20,50 @@ var APIKEY = "";
 func Init(e string, f string) {
 	ENVIRONTMENT = e;
   APIKEY = f
+
+  URL := ""
+
+  if ENVIRONTMENT == "production" {
+    URL = production_url
+  }
+
+  if ENVIRONTMENT == "staging" {
+    URL = staging_url
+  }
 }
 
 func GetCollection(collectionId string) (string) {
-  env := ENVIRONTMENT // e.A
-  url := ""
   client := &http.Client{}
 
-  if env == "production" {
-    url = production_url
-  }
+  URL += fmt.Sprintf("/api/v4/collections/%s", collectionId)
 
-  if env == "staging" {
-    url = staging_url
-  }
-
-  url += fmt.Sprintf("/api/v3/collections/%s", collectionId)
-
-  req, _ := http.NewRequest("GET", url, nil)
+  req, _ := http.NewRequest("GET", URL, nil)
   req.SetBasicAuth(APIKEY, "")
 
-  response, _ := client.Do(req)
-  bodyText, _ := ioutil.ReadAll(response.Body)
-	s := string(bodyText)
+  resp, _ := client.Do(req)
+  body, _ := ioutil.ReadAll(resp.Body)
+	s := string(body)
+  return s
+}
+
+func CreateCollection(data models.Collection) (string) {
+  URL += "/api/v4/collections"
+  requestBody, _ := json.Marshal(data)
+
+  client := &http.Client{}
+
+  req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
+  req.SetBasicAuth(APIKEY, "")
+  req.Header.Set("Content-type", "application/json")
+
+  resp, _ := client.Do(req)
+
+  body, err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    log.Fatalln(err)
+  }
+
+  s := string(body)
   return s
 }
 
