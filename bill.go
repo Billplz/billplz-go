@@ -13,7 +13,7 @@ import (
 func GetBill(billId string) (string) {
   client := &http.Client{}
 
-  URL += fmt.Sprintf("/api/v4/bills/%s", billId)
+  URL += fmt.Sprintf("/api/v3/bills/%s", billId)
 
   req, _ := http.NewRequest("GET", URL, nil)
   req.SetBasicAuth(APIKEY, "")
@@ -25,7 +25,7 @@ func GetBill(billId string) (string) {
 }
 
 func CreateBill(data models.Bill) (string) {
-  URL += "/api/v4/bills"
+  URL += "/api/v3/bills"
   requestBody, _ := json.Marshal(data)
 
   client := &http.Client{}
