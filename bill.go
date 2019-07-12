@@ -10,19 +10,6 @@ import (
   models "github.com/helmiruza/billplz-go/models"
 )
 
-func Init(e string, f string) {
-	ENVIRONTMENT = e
-  APIKEY = f
-
-  if ENVIRONTMENT == "production" {
-    URL = ProductionUrl
-  }
-
-  if ENVIRONTMENT == "staging" {
-    URL = StagingUrl
-  }
-}
-
 func GetBill(billId string) (string) {
   client := &http.Client{}
 
