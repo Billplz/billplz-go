@@ -10,25 +10,16 @@ import (
   models "github.com/helmiruza/billplz-go/models"
 )
 
-const (
-  productionUrl = "https://billplz.com"
-	stagingUrl = "https://billplz-staging.herokuapp.com"
-)
-
-var ENVIRONTMENT = ""
-var APIKEY = ""
-var URL = ""
-
 func Init(e string, f string) {
-	ENVIRONTMENT = e
-  APIKEY = f
+	constants.ENVIRONTMENT = e
+  constants.APIKEY = f
 
-  if ENVIRONTMENT == "production" {
-    URL = productionUrl
+  if constants.ENVIRONTMENT == "production" {
+    constants.URL = constants.ProductionUrl
   }
 
   if ENVIRONTMENT == "staging" {
-    URL = stagingUrl
+    constants.URL = constants.StagingUrl
   }
 }
 
@@ -38,7 +29,7 @@ func GetBill(billId string) (string) {
   URL += fmt.Sprintf("/api/v4/bills/%s", billId)
 
   req, _ := http.NewRequest("GET", URL, nil)
-  req.SetBasicAuth(APIKEY, "")
+  req.SetBasicAuth(constants.APIKEY, "")
 
   resp, _ := client.Do(req)
   body, _ := ioutil.ReadAll(resp.Body)
@@ -47,13 +38,13 @@ func GetBill(billId string) (string) {
 }
 
 func CreateBill(data models.Bill) (string) {
-  URL += "/api/v4/bills"
+  constants.URL += "/api/v4/bills"
   requestBody, _ := json.Marshal(data)
 
   client := &http.Client{}
 
-  req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
-  req.SetBasicAuth(APIKEY, "")
+  req, _ := http.NewRequest("POST", constants.URL, bytes.NewBuffer(requestBody))
+  req.SetBasicAuth(constants.APIKEY, "")
   req.Header.Set("Content-type", "application/json")
 
   resp, _ := client.Do(req)
