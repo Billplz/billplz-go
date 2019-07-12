@@ -17,7 +17,7 @@ const (
 
 var ENVIRONTMENT = ""
 var APIKEY = ""
-var URL := ""
+var URL = ""
 
 func Init(e string, f string) {
 	ENVIRONTMENT = e
