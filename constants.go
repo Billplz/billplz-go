@@ -10,14 +10,14 @@ const (
 )
 
 func Init(e string, f string) {
-	ENVIRONTMENT = e
+	ENVIRONMENT = e
   APIKEY = f
 
-  if ENVIRONTMENT == "production" {
+  if ENVIRONMENT == "production" {
     URL = ProductionUrl
   }
 
-  if ENVIRONTMENT == "staging" {
+  if ENVIRONMENT == "staging" {
     URL = StagingUrl
   }
 }

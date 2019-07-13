@@ -4,7 +4,8 @@ import (
   "fmt"
 	"net/http"
   "io/ioutil"
-  // "log"
+  "log"
+  "bytes"
   "encoding/json"
   models "github.com/helmiruza/billplz-go/models"
 )
