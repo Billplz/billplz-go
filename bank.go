@@ -149,3 +149,24 @@ func GetBankVerification(bankAccountNumber string) (string) {
 	s := string(body)
   return s
 }
+
+func CreateBankVerfication(data models.Bank) (string) {
+  URL += "/api/v3/bank_verification_services"
+  requestBody, _ := json.Marshal(data)
+
+  client := &http.Client{}
+
+  req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
+  req.SetBasicAuth(APIKEY, "")
+  req.Header.Set("Content-type", "application/json")
+
+  resp, _ := client.Do(req)
+
+  body, err := ioutil.ReadAll(resp.Body)
+  if err != nil {
+    log.Fatalln(err)
+  }
+
+  s := string(body)
+  return s
+}
