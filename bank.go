@@ -4,8 +4,7 @@ import (
   "fmt"
 	"net/http"
   "io/ioutil"
-  "log"
-  "bytes"
+  // "log"
   "encoding/json"
   models "github.com/helmiruza/billplz-go/models"
 )
@@ -94,27 +93,59 @@ func GetFpxBanks() (string) {
     },
   }
 
-	// s := string(body)
-  return bank
+  stagingBanks := []models.FpxBank{
+    {
+      BankCode: "TEST0001*",
+      BankName: "Test 0001",
+    },
+    {
+      BankCode: "TEST0002*",
+      BankName: "Test 0002",
+    },
+    {
+      BankCode: "TEST0003*",
+      BankName: "Test 0003",
+    },
+    {
+      BankCode: "TEST0004*",
+      BankName: "Test 0004",
+    },
+    {
+      BankCode: "TEST0021*",
+      BankName: "Test 0021",
+    },
+    {
+      BankCode: "TEST0022*",
+      BankName: "Test 0022",
+    },
+    {
+      BankCode: "TEST0023*",
+      BankName: "Test 0023",
+    },
+  }
+
+  if ENVIRONMENT == "staging" {
+    banks = append(banks, stagingBanks...)
+  }
+
+  b, err := json.Marshal(banks)
+  if err != nil {
+    panic(err)
+  }
+
+  return string(b)
 }
 
-// func CreatePayout(data models.Payout) (string) {
-//   URL += "/api/v4/mass_payment_instructions"
-//   requestBody, _ := json.Marshal(data)
-//
-//   client := &http.Client{}
-//
-//   req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
-//   req.SetBasicAuth(APIKEY, "")
-//   req.Header.Set("Content-type", "application/json")
-//
-//   resp, _ := client.Do(req)
-//
-//   body, err := ioutil.ReadAll(resp.Body)
-//   if err != nil {
-//     log.Fatalln(err)
-//   }
-//
-//   s := string(body)
-//   return s
-// }
+func GetBankVerification(bankAccountNumber string) (string) {
+  client := &http.Client{}
+
+  URL += fmt.Sprintf("/api/v3/bank_verification_services/%s", bankAccountNumber)
+
+  req, _ := http.NewRequest("GET", URL, nil)
+  req.SetBasicAuth(APIKEY, "")
+
+  resp, _ := client.Do(req)
+  body, _ := ioutil.ReadAll(resp.Body)
+	s := string(body)
+  return s
+}
