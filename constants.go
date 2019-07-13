@@ -1,6 +1,6 @@
 package billplz
 
-var ENVIRONTMENT = ""
+var ENVIRONMENT = ""
 var APIKEY = ""
 var URL = ""
 
