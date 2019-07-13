@@ -1,5 +1,5 @@
 package models
 
-type Collection struct {
+type PayoutCollection struct {
   Title string `json:"title"`
 }

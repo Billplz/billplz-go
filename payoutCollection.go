@@ -13,7 +13,7 @@ import (
 func GetPayoutCollection(payoutCollectionId string) (string) {
   client := &http.Client{}
 
-  URL += fmt.Sprintf("/api/v4/collections/%s", payoutCollectionId)
+  URL += fmt.Sprintf("/api/v4/mass_payment_instruction_collections/%s", payoutCollectionId)
 
   req, _ := http.NewRequest("GET", URL, nil)
   req.SetBasicAuth(APIKEY, "")
@@ -24,7 +24,7 @@ func GetPayoutCollection(payoutCollectionId string) (string) {
   return s
 }
 
-func CreatePayoutCollection(data models.Collection) (string) {
+func CreatePayoutCollection(data models.PayoutCollection) (string) {
   URL += "/api/v4/mass_payment_instruction_collections"
   requestBody, _ := json.Marshal(data)
 
