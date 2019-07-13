@@ -1,5 +1,3 @@
-![Deploy to now](https://deploy.now.sh/static/button.svg)
-
 # billplz-go
 
 Go package to use [Billplz API](https://billplz.com/api).
@@ -48,6 +46,7 @@ fmt.Println(billplz.GetCollection("ei3a6mdl"))
 #### 1.2 Create Collection
 
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Collection{
   Title: "test 4",
   SplitHeader: false,
@@ -72,6 +71,7 @@ fmt.Println(billplz.CreateCollection(data))
 #### 2.1 Create Bill
 
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Bill{
   CollectionId: "gaem247h",
   Email: "helmiruza@gmail.com",
@@ -87,12 +87,14 @@ fmt.Println(billplz.CreateBill(data))
 ```
 #### 2.2 Get Bill
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetBill("0npozuf0"))
 ```
 
 ### 3.0 Payout Collections
 #### 3.1 Create PayoutCollection
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.PayoutCollection{
   Title: "Collection for Payout",
 }
@@ -101,19 +103,25 @@ fmt.Println(billplz.CreatePayoutCollection(data))
 ```
 #### 3.2 Get Payout Collection
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetPayoutCollection(PAYOUT_COLLECTION_ID))
 ```
 ### 4.0 Banks
 #### 4.1 Get FPX Banks
+This list can be used to bypass Billplz's bill page. 
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetFpxBanks())
 ```
-#### 4.2 Get Bank Verification
+#### 4.2 Get Bank Verification Status
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetBankVerification(BANK_ACCOUNT_NO))
 ```
 #### 4.2 Verify An Account Number
+This process is required for Mass Payment Instructions (Payout). In order to create a successful payout instruction, each recipient's account should be verified.
 ```
+billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Bank{
   Name: "Insan Jaya",
   IdNo: "91234567890",
@@ -124,3 +132,5 @@ data := models.Bank{
  
 fmt.Println(billplz.CreateBankVerfication(data))
 ```
+## API Documentation
+Refer [Billplz's API Documentation](https://billplz.com/api)
