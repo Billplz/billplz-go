@@ -5,7 +5,7 @@ Go package to use [Billplz API](https://billplz.com/api).
 ## Setup
 
 Import this package
-```
+```go
 import (
   billplz "github.com/helmiruza/billplz-go"
   // models "github.com/helmiruza/billplz-go/models"
@@ -21,7 +21,7 @@ On the root folder, run `dep ensure -update`
 
 For POST requests, make sure to import the models from the package.
 
-```
+```go
 import (
   "fmt"
   billplz "github.com/helmiruza/billplz-go"
@@ -35,7 +35,7 @@ There are 2 variables need for the init function, which is `ENVIRONMENT` and `AP
 You can get your key from your Billplz dashboard.
 `ENVIRONMENT = staging | production`. Setting the correct environment is crucial as Billplz uses different urls for each environment.
 
-```
+```go
 billplz.Init(ENVIRONMENT, APIKEY)
 ```
 
@@ -67,7 +67,7 @@ Reference: [API V4 Create Collection](https://www.billplz.com/api#get-a-collecti
 | VariableCut       | string            | false             |
 | StackOrder        | integer           | true              |
 
-```
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Collection{
   Title: "test 4",
@@ -111,7 +111,7 @@ Reference: [API V3 Create Bill](https://www.billplz.com/api#create-a-bill)
 | Reference2Lable   | string            | false             |
 | Reference2        | string            | false             |
 
-```
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Bill{
   CollectionId: "gaem247h",
@@ -128,7 +128,8 @@ fmt.Println(billplz.CreateBill(data))
 ```
 #### 2.2 Get Bill
 Reference: [API V3 Get Bill](https://www.billplz.com/api#v3-get-a-bill)
-```
+
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetBill("0npozuf0"))
 ```
@@ -143,7 +144,7 @@ Reference: [API V4 Create Payout Collection](https://www.billplz.com/api#create-
 | ----------------- | ----------------- | ----------------- |
 | Title             | string            | true              |
 
-```
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.PayoutCollection{
   Title: "Collection for Payout",
@@ -153,7 +154,8 @@ fmt.Println(billplz.CreatePayoutCollection(data))
 ```
 #### 3.2 Get Payout Collection
 Reference: [API V4 Get Payout Collection](https://www.billplz.com/api#get-a-payout-collection)
-```
+
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetPayoutCollection(PAYOUT_COLLECTION_ID))
 ```
@@ -161,14 +163,17 @@ fmt.Println(billplz.GetPayoutCollection(PAYOUT_COLLECTION_ID))
 #### 4.1 Get FPX Banks
 Reference: [API V3 Get FPX Banks](https://www.billplz.com/api#get-fpx-banks)
 
-This list can be used to bypass Billplz's bill page. 
-```
+This list can be used to bypass Billplz's bill page.
+
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetFpxBanks())
 ```
+
 #### 4.2 Get Bank Verification Status
 Reference: [API V3 Get Bank Account](https://www.billplz.com/api#get-a-bank-account)
-```
+
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetBankVerification(BANK_ACCOUNT_NO))
 ```
@@ -187,7 +192,7 @@ This process is required for Mass Payment Instructions (Payout). In order to cre
 | Code              | string            | true              |
 | Organization      | boolean           | true              |
 
-```
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Bank{
   Name: "Insan Jaya",
@@ -201,3 +206,6 @@ fmt.Println(billplz.CreateBankVerfication(data))
 ```
 ## Reference
 [Billplz's API Documentation](https://billplz.com/api)
+
+## Support / Issues
+Facebook: [Billplz Dev Jam](https://www.facebook.com/groups/billplzdevjam/)
