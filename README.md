@@ -38,13 +38,13 @@ billplz.Init(ENVIRONMENT, APIKEY)
 ```
 ### 1.0 Collections
 #### 1.1 Get Collection
-
+Reference: [API V4 Get Collection](https://www.billplz.com/api#get-a-collection37)
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetCollection("ei3a6mdl"))
 ```
 #### 1.2 Create Collection
-
+Reference: [API V4 Create Collection](https://www.billplz.com/api#get-a-collection36)
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Collection{
@@ -69,7 +69,7 @@ fmt.Println(billplz.CreateCollection(data))
 
 ### 2.0 Bills
 #### 2.1 Create Bill
-
+Reference: [API V3 Create Bill](https://www.billplz.com/api#create-a-bill)
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Bill{
@@ -86,6 +86,7 @@ data := models.Bill{
 fmt.Println(billplz.CreateBill(data))
 ```
 #### 2.2 Get Bill
+Reference: [API V3 Get Bill](https://www.billplz.com/api#v3-get-a-bill)
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetBill("0npozuf0"))
@@ -132,5 +133,5 @@ data := models.Bank{
  
 fmt.Println(billplz.CreateBankVerfication(data))
 ```
-## API Documentation
-Refer [Billplz's API Documentation](https://billplz.com/api)
+## Reference
+[Billplz's API Documentation](https://billplz.com/api)
