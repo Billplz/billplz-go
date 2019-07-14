@@ -30,7 +30,9 @@ import (
 ```
 
 ### 0.0 Init
-There are 2 variables need for the init function, which is `ENVIRONMENT` and `APIKEY`. You can get your key from your Billplz dashboard.
+There are 2 variables need for the init function, which is `ENVIRONMENT` and `APIKEY`. 
+
+You can get your key from your Billplz dashboard.
 `ENVIRONMENT = staging | production`. Setting the correct environment is crucial as Billplz uses different urls for each environment.
 
 ```
@@ -112,6 +114,7 @@ fmt.Println(billplz.GetPayoutCollection(PAYOUT_COLLECTION_ID))
 ### 4.0 Banks
 #### 4.1 Get FPX Banks
 Reference: [API V3 Get FPX Banks](https://www.billplz.com/api#get-fpx-banks)
+
 This list can be used to bypass Billplz's bill page. 
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
@@ -125,6 +128,7 @@ fmt.Println(billplz.GetBankVerification(BANK_ACCOUNT_NO))
 ```
 #### 4.3 Verify A New Bank Account
 Reference: [API V3 Create Bank Account](https://www.billplz.com/api#create-a-bank-account)
+
 This process is required for Mass Payment Instructions (Payout). In order to create a successful payout instruction, each recipient's account should be verified.
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
