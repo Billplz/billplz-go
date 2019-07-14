@@ -38,15 +38,35 @@ You can get your key from your Billplz dashboard.
 ```
 billplz.Init(ENVIRONMENT, APIKEY)
 ```
+
 ### 1.0 Collections
 #### 1.1 Get Collection
 Reference: [API V4 Get Collection](https://www.billplz.com/api#get-a-collection37)
+
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 fmt.Println(billplz.GetCollection("ei3a6mdl"))
 ```
 #### 1.2 Create Collection
 Reference: [API V4 Create Collection](https://www.billplz.com/api#get-a-collection36)
+
+`Collection` struct:
+
+| Parameters        | Data Type         | Required          |
+| ----------------- | ----------------- | ----------------- |
+| Title             | string            | true              |
+| SplitHeader       | string            | false             |
+| SplitPayments     | array             | false             |
+
+`SplitPayment` struct:
+
+| Parameters        | Type              | Required          |
+| ----------------- | ----------------- | ----------------- |
+| Email             | string            | true              |
+| FixedCut          | integer           | false             |
+| VariableCut       | string            | false             |
+| StackOrder        | integer           | true              |
+
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Collection{
@@ -72,6 +92,25 @@ fmt.Println(billplz.CreateCollection(data))
 ### 2.0 Bills
 #### 2.1 Create Bill
 Reference: [API V3 Create Bill](https://www.billplz.com/api#create-a-bill)
+
+`Bill` struct:
+
+| Parameters        | Type              | Required          |
+| ----------------- | ----------------- | ----------------- |
+| CollectionId      | string            | true              |
+| Email             | string            | true              |
+| Mobile            | string            | true              |
+| Name              | string            | true              |
+| Amount            | integer           | true              |
+| CallbackUrl       | string            | true              |
+| Description       | string            | true              |
+| DueAt             | string            | true              |
+| RedirectUrl       | integer           | false             |
+| Reference1Lable   | string            | false             |
+| Reference1        | string            | false             |
+| Reference2Lable   | string            | false             |
+| Reference2        | string            | false             |
+
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Bill{
