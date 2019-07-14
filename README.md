@@ -136,6 +136,13 @@ fmt.Println(billplz.GetBill("0npozuf0"))
 ### 3.0 Payout Collections
 #### 3.1 Create PayoutCollection
 Reference: [API V4 Create Payout Collection](https://www.billplz.com/api#create-a-payout-collection)
+
+`PayoutCollection` struct:
+
+| Parameters        | Type              | Required          |
+| ----------------- | ----------------- | ----------------- |
+| Title             | string            | true              |
+
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.PayoutCollection{
@@ -169,6 +176,17 @@ fmt.Println(billplz.GetBankVerification(BANK_ACCOUNT_NO))
 Reference: [API V3 Create Bank Account](https://www.billplz.com/api#create-a-bank-account)
 
 This process is required for Mass Payment Instructions (Payout). In order to create a successful payout instruction, each recipient's account should be verified.
+
+`Bank` struct:
+
+| Parameters        | Type              | Required          |
+| ----------------- | ----------------- | ----------------- |
+| Name              | string            | true              |
+| IdNo              | string            | true              |
+| AccNo             | string            | true              |
+| Code              | string            | true              |
+| Organization      | boolean           | true              |
+
 ```
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
 data := models.Bank{
