@@ -30,7 +30,7 @@ import (
 ```
 
 ### 0.0 Init
-There are 2 variables need for the init function, which is `ENVIRONMENT` and `APIKEY`. 
+There are 2 variables need for the init function, which is `ENVIRONMENT` and `APIKEY`.
 
 You can get your key from your Billplz dashboard.
 `ENVIRONMENT = staging | production`. Setting the correct environment is crucial as Billplz uses different urls for each environment.
@@ -106,9 +106,9 @@ Reference: [API V3 Create Bill](https://www.billplz.com/api#create-a-bill)
 | Description       | string            | true              |
 | DueAt             | string            | true              |
 | RedirectUrl       | integer           | false             |
-| Reference1Lable   | string            | false             |
+| Reference1Label   | string            | false             |
 | Reference1        | string            | false             |
-| Reference2Lable   | string            | false             |
+| Reference2Label   | string            | false             |
 | Reference2        | string            | false             |
 
 ```go
@@ -201,7 +201,7 @@ data := models.Bank{
   Code: "MBBEMYKL",
   Organization: true
 }
- 
+
 fmt.Println(billplz.CreateBankVerfication(data))
 ```
 ## Reference

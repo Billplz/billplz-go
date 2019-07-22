@@ -11,8 +11,8 @@ type Bill struct {
   DueAt string `json:"due_at"`
   RedirectUrl string `json:"redirect_url"`
   Deliver bool `json:"deliver"`
-  Reference1Lable string `json:"reference_1_label"`
+  Reference1Label string `json:"reference_1_label"`
   Reference1 string `json:"reference_1"`
-  Reference2Lable string `json:"reference_2_label"`
+  Reference2Label string `json:"reference_2_label"`
   Reference2 string `json:"reference_2"`
 }
