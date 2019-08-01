@@ -43,9 +43,16 @@ billplz.Init(ENVIRONMENT, APIKEY)
 #### 1.1 Get Collection
 Reference: [API V4 Get Collection](https://www.billplz.com/api#get-a-collection37)
 
-```
+```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
-fmt.Println(billplz.GetCollection("ei3a6mdl"))
+
+r, err := billplz.GetCollection("ei3a6mdl")
+if len(err.Error.Type) > 0 {
+  fmt.Printf("%+v\n", err)
+  return
+}
+fmt.Printf("%+v\n", r)
+
 ```
 #### 1.2 Create Collection
 Reference: [API V4 Create Collection](https://www.billplz.com/api#get-a-collection36)
@@ -86,7 +93,12 @@ data := models.Collection{
   },
 }
 
-fmt.Println(billplz.CreateCollection(data))
+r, err := billplz.CreateCollection(data)
+if len(err.Error.Type) > 0 {
+  fmt.Printf("%+v\n", err)
+  return
+}
+fmt.Printf("%+v\n", r)
 ```
 
 ### 2.0 Bills
