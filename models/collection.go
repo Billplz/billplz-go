@@ -12,3 +12,15 @@ type Collection struct {
   SplitHeader bool `json:"split_header"`
   SplitPayments []SplitPayment `json:"split_payments"`
 }
+
+type Logo struct {
+  ThumbUrl string `json:"thumb_url"`
+  AvatarUrl string `json:"avatar_url"`
+}
+
+type CollectionResponse struct {
+  Collection
+	ID string	`json:"id"`
+  Logo Logo `json:"logo"`
+  Status string `json:"status"`
+}
