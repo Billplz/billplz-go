@@ -124,14 +124,25 @@ data := models.Bill{
   DueAt: "2019-07-12",
 }
 
-fmt.Println(billplz.CreateBill(data))
+resp, err := billplz.CreateBill(data)
+if len(err.Error.Type) > 0 {
+  fmt.Printf("%+v\n", err)
+  return
+}
+fmt.Printf("%+v\n", resp)
 ```
 #### 2.2 Get Bill
 Reference: [API V3 Get Bill](https://www.billplz.com/api#v3-get-a-bill)
 
 ```go
 billplz.Init("staging", "69da23bf-da10-4fda-814d-3ad970035d38")
-fmt.Println(billplz.GetBill("0npozuf0"))
+
+resp, err := billplz.GetBill("0npozuf0")
+if len(err.Error.Type) > 0 {
+  fmt.Printf("%+v\n", err)
+  return
+}
+fmt.Printf("%+v\n", resp)
 ```
 
 ### 3.0 Payout Collections
