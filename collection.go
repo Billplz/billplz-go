@@ -4,13 +4,12 @@ import (
   "fmt"
 	"net/http"
   "io/ioutil"
-  "log"
   "bytes"
   "encoding/json"
   models "github.com/billplz/billplz-go/models"
 )
 
-func GetCollection(collectionId string) (string) {
+func GetCollection(collectionId string) (models.CollectionResponse, models.Error) {
   client := &http.Client{}
 
   URL += fmt.Sprintf("/api/v4/collections/%s", collectionId)
@@ -19,12 +18,17 @@ func GetCollection(collectionId string) (string) {
   req.SetBasicAuth(APIKEY, "")
 
   resp, _ := client.Do(req)
-  body, _ := ioutil.ReadAll(resp.Body)
-	s := string(body)
-  return s
+  body, err := ioutil.ReadAll(resp.Body)
+
+  obj, err1 := response(body, err, "collection")
+  objString, _ := json.Marshal(obj)
+  k := models.CollectionResponse{}
+  json.Unmarshal(objString, &k)
+
+  return k, err1
 }
 
-func CreateCollection(data models.Collection) (string) {
+func CreateCollection(data models.Collection) (models.CollectionResponse, models.Error) {
   URL += "/api/v4/collections"
   requestBody, _ := json.Marshal(data)
 
@@ -35,14 +39,12 @@ func CreateCollection(data models.Collection) (string) {
   req.Header.Set("Content-type", "application/json")
 
   resp, _ := client.Do(req)
-
   body, err := ioutil.ReadAll(resp.Body)
-  if err != nil {
-    log.Fatalln(err)
-  }
 
-  s := string(body)
-  return s
+  obj, err1 := response(body, err, "collection")
+  objString, _ := json.Marshal(obj)
+  k := models.CollectionResponse{}
+  json.Unmarshal(objString, &k)
+
+  return k, err1
 }
-
-// ei3a6mdl

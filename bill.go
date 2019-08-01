@@ -20,7 +20,12 @@ func GetBill(billId string) (models.BillResponse, models.Error) {
   resp, _ := client.Do(req)
   body, err := ioutil.ReadAll(resp.Body)
 
-  return response(body, err)
+  obj, err1 := response(body, err, "bill")
+  objString, _ := json.Marshal(obj)
+  k := models.BillResponse{}
+  json.Unmarshal(objString, &k)
+
+  return k, err1
 }
 
 func CreateBill(data models.Bill) (models.BillResponse, models.Error) {
@@ -36,25 +41,10 @@ func CreateBill(data models.Bill) (models.BillResponse, models.Error) {
   resp, _ := client.Do(req)
   body, err := ioutil.ReadAll(resp.Body)
 
-  return response(body, err)
-}
+  obj, err1 := response(body, err, "bill")
+  objString, _ := json.Marshal(obj)
+  k := models.BillResponse{}
+  json.Unmarshal(objString, &k)
 
-func response(body []byte, err error) (models.BillResponse, models.Error) {
-  errorMessage := models.Error{}
-
-  if err != nil {
-    errorMessage.Error = models.ErrorDetail { Type: "unknown", Message: "unknown" }
-    return models.BillResponse{},errorMessage
-  }
-
-  response := models.BillResponse{}
-  json.Unmarshal(body, &errorMessage)
-
-  if len(errorMessage.Error.Type) > 0 {
-    return response, errorMessage
-  }
-
-  json.Unmarshal(body, &response)
-
-  return response, errorMessage
+  return k, err1
 }
