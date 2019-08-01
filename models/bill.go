@@ -16,3 +16,7 @@ type Bill struct {
   Reference2Label string `json:"reference_2_label"`
   Reference2 string `json:"reference_2"`
 }
+
+type BillResponse struct {
+  
+}

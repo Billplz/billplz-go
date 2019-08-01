@@ -7,8 +7,8 @@ Go package to use [Billplz API](https://billplz.com/api).
 Import this package
 ```go
 import (
-  billplz "github.com/helmiruza/billplz-go"
-  // models "github.com/helmiruza/billplz-go/models"
+  billplz "github.com/billplz/billplz-go"
+  // models "github.com/billplz/billplz-go/models"
 )
 ```
 On the root folder, run `dep ensure`
@@ -24,8 +24,8 @@ For POST requests, make sure to import the models from the package.
 ```go
 import (
   "fmt"
-  billplz "github.com/helmiruza/billplz-go"
-  models "github.com/helmiruza/billplz-go/models"
+  billplz "github.com/billplz/billplz-go"
+  models "github.com/billplz/billplz-go/models"
 )
 ```
 

@@ -7,7 +7,7 @@ import (
   "log"
   "bytes"
   "encoding/json"
-  models "github.com/helmiruza/billplz-go/models"
+  models "github.com/billplz/billplz-go/models"
 )
 
 func GetPayoutCollection(payoutCollectionId string) (string) {
