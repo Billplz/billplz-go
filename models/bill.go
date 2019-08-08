@@ -8,7 +8,7 @@ type Bill struct {
   Amount int `json:"amount"`
   CallbackUrl string `json:"callback_url"`
   Description string `json:"description"`
-  DueAt CustomTime`json:"due_at"`
+  DueAt string `json:"due_at"`
   RedirectUrl string `json:"redirect_url"`
   Deliver bool `json:"deliver"`
   Reference1Label string `json:"reference_1_label"`
