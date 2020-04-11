@@ -11,8 +11,8 @@ var APIKEY = ""
 var URL = ""
 
 const (
-  ProductionUrl = "https://billplz.com"
-	StagingUrl = "https://billplz-staging.herokuapp.com"
+  ProductionUrl = "https://www.billplz.com"
+	StagingUrl = "https://www.billplz-sandbox.com"
 )
 
 func Init(e string, f string) {
