@@ -1,48 +1,49 @@
 package billplz
 
 import (
-  "fmt"
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
-  "io/ioutil"
-  "log"
-  "bytes"
-  "encoding/json"
-  models "github.com/billplz/billplz-go/models"
+
+	models "github.com/billplz/billplz-go/models"
 )
 
-func GetPayoutCollection(payoutCollectionId string) (string) {
-  client := &http.Client{}
+func GetPayoutCollection(payoutCollectionId string) string {
+	client := &http.Client{}
 
-  URL += fmt.Sprintf("/api/v4/mass_payment_instruction_collections/%s", payoutCollectionId)
+	url := fmt.Sprintf(URL+"/api/v4/mass_payment_instruction_collections/%s", payoutCollectionId)
 
-  req, _ := http.NewRequest("GET", URL, nil)
-  req.SetBasicAuth(APIKEY, "")
+	req, _ := http.NewRequest("GET", url, nil)
+	req.SetBasicAuth(APIKEY, "")
 
-  resp, _ := client.Do(req)
-  body, _ := ioutil.ReadAll(resp.Body)
+	resp, _ := client.Do(req)
+	body, _ := ioutil.ReadAll(resp.Body)
 	s := string(body)
-  return s
+	return s
 }
 
-func CreatePayoutCollection(data models.PayoutCollection) (string) {
-  URL += "/api/v4/mass_payment_instruction_collections"
-  requestBody, _ := json.Marshal(data)
+func CreatePayoutCollection(data models.PayoutCollection) string {
+	url := URL + "/api/v4/mass_payment_instruction_collections"
+	requestBody, _ := json.Marshal(data)
 
-  client := &http.Client{}
+	client := &http.Client{}
 
-  req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
-  req.SetBasicAuth(APIKEY, "")
-  req.Header.Set("Content-type", "application/json")
+	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(requestBody))
+	req.SetBasicAuth(APIKEY, "")
+	req.Header.Set("Content-type", "application/json")
 
-  resp, _ := client.Do(req)
+	resp, _ := client.Do(req)
 
-  body, err := ioutil.ReadAll(resp.Body)
-  if err != nil {
-    log.Fatalln(err)
-  }
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-  s := string(body)
-  return s
+	s := string(body)
+	return s
 }
 
 // ei3a6mdl

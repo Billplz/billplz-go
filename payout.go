@@ -1,46 +1,47 @@
 package billplz
 
 import (
-  "fmt"
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
-  "io/ioutil"
-  "log"
-  "bytes"
-  "encoding/json"
-  models "github.com/billplz/billplz-go/models"
+
+	models "github.com/billplz/billplz-go/models"
 )
 
-func GetPayout(payoutId string) (string) {
-  client := &http.Client{}
+func GetPayout(payoutId string) string {
+	client := &http.Client{}
 
-  URL += fmt.Sprintf("/api/v4/mass_payment_instructions/%s", payoutId)
+	url := URL + fmt.Sprintf("/api/v4/mass_payment_instructions/%s", payoutId)
 
-  req, _ := http.NewRequest("GET", URL, nil)
-  req.SetBasicAuth(APIKEY, "")
+	req, _ := http.NewRequest("GET", url, nil)
+	req.SetBasicAuth(APIKEY, "")
 
-  resp, _ := client.Do(req)
-  body, _ := ioutil.ReadAll(resp.Body)
+	resp, _ := client.Do(req)
+	body, _ := ioutil.ReadAll(resp.Body)
 	s := string(body)
-  return s
+	return s
 }
 
-func CreatePayout(data models.Payout) (string) {
-  URL += "/api/v4/mass_payment_instructions"
-  requestBody, _ := json.Marshal(data)
+func CreatePayout(data models.Payout) string {
+	url := URL + "/api/v4/mass_payment_instructions"
+	requestBody, _ := json.Marshal(data)
 
-  client := &http.Client{}
+	client := &http.Client{}
 
-  req, _ := http.NewRequest("POST", URL, bytes.NewBuffer(requestBody))
-  req.SetBasicAuth(APIKEY, "")
-  req.Header.Set("Content-type", "application/json")
+	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(requestBody))
+	req.SetBasicAuth(APIKEY, "")
+	req.Header.Set("Content-type", "application/json")
 
-  resp, _ := client.Do(req)
+	resp, _ := client.Do(req)
 
-  body, err := ioutil.ReadAll(resp.Body)
-  if err != nil {
-    log.Fatalln(err)
-  }
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-  s := string(body)
-  return s
+	s := string(body)
+	return s
 }
